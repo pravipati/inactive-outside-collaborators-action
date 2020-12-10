@@ -23,7 +23,7 @@ module.exports = class OrganizationUserActivity {
     const self = this;
 
     const repositories = await self.organizationClient.getRepositories(org)
-      , orgUsers = await self.organizationClient.orgs.listOutsideCollaborators({org})
+      , orgUsers = await self.organizationClient.findOutsideCollaborators(org)
     ;
 
     const activityResults = {};
