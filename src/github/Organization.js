@@ -33,6 +33,19 @@ module.exports = class Organization {
         });
       });
   }
+  
+  
+  findOutsideCollaborators(org) {
+    return this.octokit.paginate("GET /orgs/:org/outside_collaborators", {org: org, per_page: 100})
+      .then(outsideCollaborators => {
+        return outsideCollaborators.map(outsideCollaborator => {
+          return {
+            login: outsideCollaborator.login,
+            email: outsideCollaborator.email || ''
+          };
+        });
+      });
+  }
 
   get octokit() {
     return this._octokit;
